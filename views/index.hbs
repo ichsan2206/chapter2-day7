@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+ <script src="https://kit.fontawesome.com/66d5531b7c.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<body>
+
+ <nav class="navbar navbar-expand-lg navbar-light nav">
+        <div class="container-fluid  mx-5">
+          <a class="navbar-brand" href="#"><img src="../assets/img/logo.png" alt="Italian Trulli"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link  text-navy" aria-current="page" href="/">Home</a>
+              </li>
+                {{#if isLogin}}
+              <li class="nav-item">
+                <a class="nav-link  text-navy" href="/myproject">My Project</a>
+              </li>
+                 {{/if}}
+            </ul>
+            <form class="d-flex">
+              {{#if isLogin}}
+              <a class="nav-link text-navy" href="#">Halo, {{user.name}}</a>
+             <a class="nav-link text-navy" href="/logout">Logout</a>
+              {{else}}
+             <a class="nav-link text-navy" href="/login">Login</a>
+             <a class="nav-link text-navy" href="/register">Register</a>
+             {{/if}}
+              <button class="bg-navy rounded-pill px-4 text-light " type="submit"><a href="/contact" class="text-decoration-none text-light">Contact Me</a></button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      
+{{#if messages.success}}    
+<div>
+<div class="alert alert-success fadeout" style="position: absolute" role="alert">
+  {{messages.success}}
+</div>
+</div>
+{{/if}}
+<div class="container-color container-fluid d-flex justify-content-center align-items-center">
+<div class="container-sm d-flex justify-content-center align-items-center card-container-color py-5 px-4 shadow ">
+  <div class="row d-flex">
+    <div class="col-sm-8">
+      <div class="my-2 py-3 flex-wrap">
+      <h1>Hi Welcome to My Hut</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis deserunt nisi delectus asperiores eius doloremque sint, expedita, sed vero similique esse laboriosam quos inventore optio, debitis molestiae earum itaque corrupti.</p>  
+    </div>
+      <div class="d-flex align-items-center">
+        <button class="bg-navy rounded-pill px-4" type="submit"><a class="text-light text-decoration-none" href="contact.html">Contact</a></button>
+        <a href="#" class="text-decoration-none ms-3 text-navy">Download CV 
+            <i class="fa-solid fa-download"></i>
+            </a>
+        </div>
+        <h4 class="my-2 pt-3 pb-1">Found Me On</h4>
+        <div class="my-2">
+            <i class="fa-brands fa-facebook fa-2xl"></i>
+            <i class="fa-brands fa-twitter fa-2xl"></i>
+            <i class="fa-brands fa-instagram fa-2xl"></i>
+            <i class="fa-brands fa-linkedin fa-2xl"></i>
+        </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card shadow d-flex justify-content-center" style="width: 19rem;">
+        <img src="../assets/img/Ihsan.jpeg" class="card-img-top" alt="...">
+        <div class="card-body text-center">
+          <h3 class="card-title">Jamiludin Ihsan</h3>
+          <p class="card-text">full Stack Developer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="post-project">
+  <h2 class="text-navy my-2 pb-3 text-center">My Project</h2>
+  <div class="grid-container">  
+
+ {{#each projects}}
+  <div class="grid-item" id="grid-item">
+                <div>
+                <a href="/detail-project/{{id}}" target="_blank" style="text-decoration: none; color: black">
+                <img src="../upload/{{this.image}}" alt=""/>
+                </a>
+                <div class="title">
+                    <h2>{{this.name}}</a></h2>
+                    <p>Durasi: {{this.durasi}} bulan</p>
+                </div>
+                <div><p>Author: {{this.author}}</p></div>
+                <p> {{this.description}}</p>
+                <div class="tech-icon">
+                {{#if this.technologies.[0]}}<i class='fa-brands fa-node-js fa-2x1'></i>{{/if}}
+                {{#if this.technologies.[1]}}<i class='fa-brands fa-react fa-2x1'></i>{{/if}}
+                {{#if this.technologies.[2]}}<i class='fa-brands fa-android fa-2x1'></i>{{/if}}
+                {{#if this.technologies.[3]}}<i class='fa-brands fa-java fa-2x1'></i>{{/if}} 
+                </div>
+                <div class="button-group">
+                  {{#if isLogin}}
+                    <button type="button" onclick=""><a href="update/{{id}}" style="text-decoration: none;  color: white">edit</a></button>
+                    <button type="button" onclick=""><a href="delete-project/{{id}}" style="text-decoration: none;  color: white">delete</a></button>
+                {{/if}}
+                </div>
+                </div>
+  </div>
+  {{/each}}
+  </div>
+  </div>
+</body>
+</html>
